@@ -1,0 +1,4 @@
+[11/Jan/2026:15:24:55 +0000] 405 - OPTIONS http localhost "/G%24" [Client 172.18.0.1] [Length 154] [Gzip -] "Microsoft-WebDAV-MiniRedir/10.0.26200" "-"
+[11/Jan/2026:15:26:06 +0000] 405 - OPTIONS http localhost "/G%24/My%20Drive/Summa%20Niveau%204%20IT%20Expert/Leerjaar%202/Keuzedelen/Ondernemend%20gedrag/Gespreksverslagen/Gespreksverslag%20Marjan%2002-12-2025.docx" [Client 172.18.0.1] [Length 154] [Gzip -] "Microsoft-WebDAV-MiniRedir/10.0.26200" "-"
+[12/Jan/2026:11:39:13 +0000] 400 - GET http localhost "/" [Client 172.18.0.1] [Length 654] [Gzip -] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" "-"
+[12/Jan/2026:11:39:13 +0000] 400 - GET http localhost "/favicon.ico" [Client 172.18.0.1] [Length 654] [Gzip -] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" "http://localhost:443/"

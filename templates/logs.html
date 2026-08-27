@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Systeem Logs (Live)</h1>
+
+<div class="search-container" style="margin-bottom: 20px;">
+    <input type="text" id="searchInput" placeholder="Zoek live in logs..." 
+           style="width: 100%; padding: 12px; border-radius: 8px; border: none;">
+</div>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #3a3a8a; color: white;">
+            <th style="padding: 12px; text-align: left; width: 10%;">ID</th>
+            <th style="padding: 12px; text-align: left; width: 60%;">Melding</th>
+            <th style="padding: 12px; text-align: left; width: 30%;">Tijdstip</th>
+        </tr>
+    </thead>
+    <tbody id="logsTableBody">
+        <tr><td colspan="3" style="text-align:center; padding: 20px;">Verbinding maken...</td></tr>
+    </tbody>
+</table>
+
+<script>
+    // Deze functie haalt de data op van jouw nieuwe API route
+    function updateLogs() {
+        const zoekterm = document.getElementById('searchInput').value;
+        
+        fetch(`/api/logs?q=${encodeURIComponent(zoekterm)}`)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('logsTableBody');
+                tbody.innerHTML = ''; // Maak tabel leeg
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: #888;">Geen logs gevonden.</td></tr>';
+                    return;
+                }
+
+                // Loop door alle logs heen
+                data.forEach(log => {
+                    // Maak de tekst rood als er 'Down' of 'Error' in staat
+                    let style = "";
+                    const tekst = log.melding.toLowerCase();
+                    if (tekst.includes('down') || tekst.includes('error') || tekst.includes('fout')) {
+                        style = "color: #ff5c5c; font-weight: bold;";
+                    }
+
+                    const row = `
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 10px;">${log.id}</td>
+                            <td style="padding: 10px; ${style}">${log.melding}</td>
+                            <td style="padding: 10px;">${log.datum}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Fout:', error));
+    }
+
+    // Update elke 2 seconden
+    setInterval(updateLogs, 2000);
+    
+    // En doe het direct bij het laden
+    updateLogs();
+    
+    // Als je typt, zoek direct
+    document.getElementById('searchInput').addEventListener('input', updateLogs);
+</script>
+{% endblock %}

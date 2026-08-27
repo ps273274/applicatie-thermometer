@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Live Monitoring</h1>
+
+<div class="monitor-container">
+    <iframe 
+        src="http://monitor.summastoringen.nl/status/summa" 
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        style="border-radius: 8px; box-shadow: 0 0 10px #3a3a8a;">
+    </iframe>
+</div>
+
+<p style="text-align: center; margin-top: 10px; color: #888;">
+    <em>Data wordt live opgehaald uit Uptime Kuma.</em>
+</p>
+{% endblock %}

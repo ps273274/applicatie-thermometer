@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Inloggen</h1>
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+<form class="loginknoppen" method="POST" action="/login">
+    <input type="text" name="username" placeholder="Gebruikersnaam" required>
+    <input type="password" name="password" placeholder="Wachtwoord" required>
+    <button class="login-btn" type="submit">Inloggen</button>
+</form>
+{% endblock %}

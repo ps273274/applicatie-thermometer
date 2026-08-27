@@ -1,0 +1,1 @@
+2026/08/25 11:06:02 [error] 234#234: *3 open() "/var/www/html/phpmyadmin/index.php" failed (2: No such file or directory), client: 172.19.0.1, server: localhost-nginx-proxy-manager, request: "POST /phpmyadmin/index.php?route=/ HTTP/1.1", host: "localhost"

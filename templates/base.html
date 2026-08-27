@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Storingswebsite Summa College</title>
+</head>
+<body>
+
+<header class="summa-header">
+    <img class="logo" src="/static/img/logo.png" alt="Summa Logo">
+    {% if session.get('user') %}
+    <nav>
+        <a href="/">Home</a>
+        <a href="/monitoring">Monitoring</a>
+        <a href="/logs">Logs</a>
+        <a href="/logout">Uitloggen</a>
+    </nav>
+    {% endif %}
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

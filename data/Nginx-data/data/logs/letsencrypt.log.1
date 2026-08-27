@@ -1,0 +1,217 @@
+2025-12-12 08:22:06,607:DEBUG:certbot._internal.main:certbot version: 5.1.0
+2025-12-12 08:22:06,608:DEBUG:certbot._internal.main:Location of certbot entry point: /opt/certbot/bin/certbot
+2025-12-12 08:22:06,608:DEBUG:certbot._internal.main:Arguments: ['--config', '/etc/letsencrypt.ini', '--work-dir', '/tmp/letsencrypt-lib', '--logs-dir', '/data/logs', '--cert-name', 'npm-3', '--agree-tos', '-m', 'ps225262@summacollege.nl', '--preferred-challenges', 'dns', '--domains', '*.summastoringen.nl', '--authenticator', 'dns-cloudflare', '--dns-cloudflare-credentials', '/etc/letsencrypt/credentials/credentials-3', '--dns-cloudflare-propagation-seconds', '60']
+2025-12-12 08:22:06,608:DEBUG:certbot._internal.main:Discovered plugins: PluginsRegistry(PluginEntryPoint#dns-cloudflare,PluginEntryPoint#manual,PluginEntryPoint#null,PluginEntryPoint#standalone,PluginEntryPoint#webroot)
+2025-12-12 08:22:07,358:DEBUG:certbot._internal.log:Root logging level set at 30
+2025-12-12 08:22:07,386:DEBUG:certbot._internal.plugins.selection:Requested authenticator dns-cloudflare and installer None
+2025-12-12 08:22:07,389:DEBUG:certbot._internal.plugins.selection:Single candidate plugin: * dns-cloudflare
+Description: Obtain certificates using a DNS TXT record (if you are using Cloudflare for DNS).
+Interfaces: Authenticator, Plugin
+Entry point: EntryPoint(name='dns-cloudflare', value='certbot_dns_cloudflare._internal.dns_cloudflare:Authenticator', group='certbot.plugins')
+Initialized: <certbot_dns_cloudflare._internal.dns_cloudflare.Authenticator object at 0x7fa19fe2e850>
+Prep: True
+2025-12-12 08:22:07,393:DEBUG:certbot._internal.plugins.selection:Selected authenticator <certbot_dns_cloudflare._internal.dns_cloudflare.Authenticator object at 0x7fa19fe2e850> and installer None
+2025-12-12 08:22:07,397:INFO:certbot._internal.plugins.selection:Plugins selected: Authenticator dns-cloudflare, Installer None
+2025-12-12 08:22:07,561:DEBUG:certbot._internal.main:Picked account: <Account(RegistrationResource(body=Registration(key=None, contact=(), agreement=None, status=None, terms_of_service_agreed=None, only_return_existing=None, external_account_binding=None), uri='https://acme-v02.api.letsencrypt.org/acme/acct/2866812806', new_authzr_uri=None, terms_of_service=None), c07739a37f0d8a78edeb971ff98f28bc, Meta(creation_dt=datetime.datetime(2025, 12, 10, 13, 19, 3, tzinfo=datetime.timezone.utc), creation_host='600de0b9d1b0', register_to_eff=None))>
+2025-12-12 08:22:07,566:DEBUG:acme.client:Sending GET request to https://acme-v02.api.letsencrypt.org/directory.
+2025-12-12 08:22:07,572:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): acme-v02.api.letsencrypt.org:443
+2025-12-12 08:22:08,543:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "GET /directory HTTP/1.1" 200 1063
+2025-12-12 08:22:08,548:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Fri, 12 Dec 2025 08:22:08 GMT
+Content-Type: application/json
+Content-Length: 1063
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "keyChange": "https://acme-v02.api.letsencrypt.org/acme/key-change",
+  "meta": {
+    "caaIdentities": [
+      "letsencrypt.org"
+    ],
+    "profiles": {
+      "classic": "https://letsencrypt.org/docs/profiles#classic",
+      "shortlived": "https://letsencrypt.org/docs/profiles#shortlived (not yet generally available)",
+      "tlsclient": "https://letsencrypt.org/docs/profiles#tlsclient",
+      "tlsserver": "https://letsencrypt.org/docs/profiles#tlsserver"
+    },
+    "termsOfService": "https://letsencrypt.org/documents/LE-SA-v1.6-August-18-2025.pdf",
+    "website": "https://letsencrypt.org"
+  },
+  "newAccount": "https://acme-v02.api.letsencrypt.org/acme/new-acct",
+  "newNonce": "https://acme-v02.api.letsencrypt.org/acme/new-nonce",
+  "newOrder": "https://acme-v02.api.letsencrypt.org/acme/new-order",
+  "renewalInfo": "https://acme-v02.api.letsencrypt.org/acme/renewal-info",
+  "revokeCert": "https://acme-v02.api.letsencrypt.org/acme/revoke-cert",
+  "tmsi5zqjZWg": "https://community.letsencrypt.org/t/adding-random-entries-to-the-directory/33417"
+}
+2025-12-12 08:22:08,574:DEBUG:certbot._internal.display.obj:Notifying user: Requesting a certificate for *.summastoringen.nl
+2025-12-12 08:22:08,596:DEBUG:acme.client:Requesting fresh nonce
+2025-12-12 08:22:08,601:DEBUG:acme.client:Sending HEAD request to https://acme-v02.api.letsencrypt.org/acme/new-nonce.
+2025-12-12 08:22:08,863:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "HEAD /acme/new-nonce HTTP/1.1" 200 0
+2025-12-12 08:22:08,866:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Fri, 12 Dec 2025 08:22:08 GMT
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: vDSEep9oa8Wr2ssOqe38yacE1tPEyB23SBcgfOFWO_wzhzjwH3k
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+
+2025-12-12 08:22:08,873:DEBUG:acme.client:Storing nonce: vDSEep9oa8Wr2ssOqe38yacE1tPEyB23SBcgfOFWO_wzhzjwH3k
+2025-12-12 08:22:08,877:DEBUG:acme.client:JWS payload:
+b'{\n  "identifiers": [\n    {\n      "type": "dns",\n      "value": "*.summastoringen.nl"\n    }\n  ]\n}'
+2025-12-12 08:22:08,902:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/new-order:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvMjg2NjgxMjgwNiIsICJub25jZSI6ICJ2RFNFZXA5b2E4V3Iyc3NPcWUzOHlhY0UxdFBFeUIyM1NCY2dmT0ZXT193emh6andIM2siLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL25ldy1vcmRlciJ9",
+  "signature": "VsfmkmX9lc4OA8WyhLr40JigOb-HhvyO3DOg8m2SG058aiVCdbk7K4RuDo0wyZ4ZgyWq1K1BSWpgVzcZzqioUwLk4CP8Ed0Dh2LIrxvwFtzUnRNisFogCfmGnTFXpOqpL1823GRLwrQg88QYWLloax0yx3VkIn0F5axeJi5uwp6uvcTc-Wj4vGYYhkYYCuDY5jrdUDX97qnLe3QdOlgPAUeMUBFw-gUfj-qH2yFr1ZI-ES9PN6gECwYvPk7xGEl765pH9JtLUdsvkr9zxLK0nGg9OiOmhWOyyOkRNeZUukueR3r6xWUhLmIK7bZwA8tEAJGXGRm2uVaborjtcEhoWQ",
+  "payload": "ewogICJpZGVudGlmaWVycyI6IFsKICAgIHsKICAgICAgInR5cGUiOiAiZG5zIiwKICAgICAgInZhbHVlIjogIiouc3VtbWFzdG9yaW5nZW4ubmwiCiAgICB9CiAgXQp9"
+}
+2025-12-12 08:22:09,078:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/new-order HTTP/1.1" 201 353
+2025-12-12 08:22:09,081:DEBUG:acme.client:Received response:
+HTTP 201
+Server: nginx
+Date: Fri, 12 Dec 2025 08:22:08 GMT
+Content-Type: application/json
+Content-Length: 353
+Connection: keep-alive
+Boulder-Requester: 2866812806
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Location: https://acme-v02.api.letsencrypt.org/acme/order/2866812806/458001854816
+Replay-Nonce: vDSEep9opqR0nRQ76mrqVFqH8cq926-k_AklTimnMp3VYeUGZpw
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "status": "pending",
+  "expires": "2025-12-19T08:22:08Z",
+  "identifiers": [
+    {
+      "type": "dns",
+      "value": "*.summastoringen.nl"
+    }
+  ],
+  "authorizations": [
+    "https://acme-v02.api.letsencrypt.org/acme/authz/2866812806/626324437876"
+  ],
+  "finalize": "https://acme-v02.api.letsencrypt.org/acme/finalize/2866812806/458001854816"
+}
+2025-12-12 08:22:09,083:DEBUG:acme.client:Storing nonce: vDSEep9opqR0nRQ76mrqVFqH8cq926-k_AklTimnMp3VYeUGZpw
+2025-12-12 08:22:09,086:DEBUG:acme.client:JWS payload:
+b''
+2025-12-12 08:22:09,092:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz/2866812806/626324437876:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvMjg2NjgxMjgwNiIsICJub25jZSI6ICJ2RFNFZXA5b3BxUjBuUlE3Nm1ycVZGcUg4Y3E5MjYta19Ba2xUaW1uTXAzVlllVUdacHciLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2F1dGh6LzI4NjY4MTI4MDYvNjI2MzI0NDM3ODc2In0",
+  "signature": "KMXpKCYs9XjRL0WFFyTxGm847B1alEdigyai1AdjT9hfc0NhHqwyNTssGMROl0uDd_VXwccSyiiQ793BlFKlukT59JK1YWKZHENGWB0-P5iLS4uYm8mUzrp-MMDVdOEF0dPdCVVoDPJPUGethG-eDQca2JZgtBuohPgYmJU7XW_MocwEdRf7B57PNOnVo-2Nup5-FHUgkvlE1pws71E8j3dFrr554fGbiQS_1iWjNG0CliquJolUdeS8-LyieU6t341yY7Z4AZdDHc6J2SOZ2JMoiQtO0I0nbPjKYXGi7YiKO4tWu4G1592dvccV36Hoo7iPCzOiraiYZT1seaRJmw",
+  "payload": ""
+}
+2025-12-12 08:22:09,252:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz/2866812806/626324437876 HTTP/1.1" 200 399
+2025-12-12 08:22:09,257:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Fri, 12 Dec 2025 08:22:09 GMT
+Content-Type: application/json
+Content-Length: 399
+Connection: keep-alive
+Boulder-Requester: 2866812806
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 61kU_lFIkIBaQcVJ9l-Wuu9p572KGPtmX1qzsywgbhpLPa4MMh0
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "summastoringen.nl"
+  },
+  "status": "pending",
+  "expires": "2025-12-19T08:22:08Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall/2866812806/626324437876/mILCfw",
+      "status": "pending",
+      "token": "4c0GV7DsEK9K7kLtb5B_IcOX4qYYEyJiV-V18Xd3Ids"
+    }
+  ],
+  "wildcard": true
+}
+2025-12-12 08:22:09,261:DEBUG:acme.client:Storing nonce: 61kU_lFIkIBaQcVJ9l-Wuu9p572KGPtmX1qzsywgbhpLPa4MMh0
+2025-12-12 08:22:09,264:INFO:certbot._internal.auth_handler:Performing the following challenges:
+2025-12-12 08:22:09,267:INFO:certbot._internal.auth_handler:dns-01 challenge for summastoringen.nl
+2025-12-12 08:22:09,316:DEBUG:urllib3.util.retry:Converted retries value: 5 -> Retry(total=5, connect=None, read=None, redirect=None, status=None)
+2025-12-12 08:22:09,320:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-12-12 08:22:10,605:DEBUG:urllib3.connectionpool:https://api.cloudflare.com:443 "GET /client/v4/zones?name=summastoringen.nl&per_page=1 HTTP/1.1" 200 None
+2025-12-12 08:22:11,398:DEBUG:urllib3.connectionpool:https://api.cloudflare.com:443 "GET /client/v4/zones?name=nl&per_page=1 HTTP/1.1" 200 None
+2025-12-12 08:22:11,452:DEBUG:certbot._internal.error_handler:Encountered exception:
+Traceback (most recent call last):
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/_internal/auth_handler.py", line 84, in handle_authorizations
+    resps = self.auth.perform(achalls)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/plugins/dns_common.py", line 78, in perform
+    self._perform(domain, validation_domain_name, validation)
+  File "/opt/certbot/lib/python3.11/site-packages/certbot_dns_cloudflare/_internal/dns_cloudflare.py", line 75, in _perform
+    self._get_cloudflare_client().add_txt_record(domain, validation_name, validation, self.ttl)
+  File "/opt/certbot/lib/python3.11/site-packages/certbot_dns_cloudflare/_internal/dns_cloudflare.py", line 120, in add_txt_record
+    zone_id = self._find_zone_id(domain)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot_dns_cloudflare/_internal/dns_cloudflare.py", line 237, in _find_zone_id
+    raise errors.PluginError('Unable to determine zone_id for {0} using zone names: '
+certbot.errors.PluginError: Unable to determine zone_id for summastoringen.nl using zone names: ['summastoringen.nl', 'nl']. Please confirm that the domain name has been entered correctly and is already associated with the supplied Cloudflare account.
+
+2025-12-12 08:22:11,455:DEBUG:certbot._internal.error_handler:Calling registered functions
+2025-12-12 08:22:11,458:INFO:certbot._internal.auth_handler:Cleaning up challenges
+2025-12-12 08:22:11,475:DEBUG:urllib3.util.retry:Converted retries value: 5 -> Retry(total=5, connect=None, read=None, redirect=None, status=None)
+2025-12-12 08:22:11,480:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-12-12 08:22:12,559:DEBUG:urllib3.connectionpool:https://api.cloudflare.com:443 "GET /client/v4/zones?name=summastoringen.nl&per_page=1 HTTP/1.1" 200 None
+2025-12-12 08:22:13,401:DEBUG:urllib3.connectionpool:https://api.cloudflare.com:443 "GET /client/v4/zones?name=nl&per_page=1 HTTP/1.1" 200 None
+2025-12-12 08:22:13,406:DEBUG:certbot_dns_cloudflare._internal.dns_cloudflare:Encountered error finding zone_id during deletion: Unable to determine zone_id for summastoringen.nl using zone names: ['summastoringen.nl', 'nl']. Please confirm that the domain name has been entered correctly and is already associated with the supplied Cloudflare account.
+2025-12-12 08:22:13,424:DEBUG:certbot._internal.log:Exiting abnormally:
+Traceback (most recent call last):
+  File "/opt/certbot/bin/certbot", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/main.py", line 18, in main
+    return internal_main.main(cli_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/_internal/main.py", line 1850, in main
+    return config.func(config, plugins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/_internal/main.py", line 1562, in certonly
+    lineage = _get_and_save_cert(le_client, config, domains, certname, lineage)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/_internal/main.py", line 141, in _get_and_save_cert
+    lineage = le_client.obtain_and_enroll_certificate(domains, certname)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/_internal/client.py", line 526, in obtain_and_enroll_certificate
+    cert, chain, key, _ = self.obtain_certificate(domains)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/_internal/client.py", line 427, in obtain_certificate
+    orderr = self._get_order_and_authorizations(csr.data, self.config.allow_subset_of_names)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/_internal/client.py", line 505, in _get_order_and_authorizations
+    authzr = self.auth_handler.handle_authorizations(orderr, self.config, best_effort)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/_internal/auth_handler.py", line 84, in handle_authorizations
+    resps = self.auth.perform(achalls)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot/plugins/dns_common.py", line 78, in perform
+    self._perform(domain, validation_domain_name, validation)
+  File "/opt/certbot/lib/python3.11/site-packages/certbot_dns_cloudflare/_internal/dns_cloudflare.py", line 75, in _perform
+    self._get_cloudflare_client().add_txt_record(domain, validation_name, validation, self.ttl)
+  File "/opt/certbot/lib/python3.11/site-packages/certbot_dns_cloudflare/_internal/dns_cloudflare.py", line 120, in add_txt_record
+    zone_id = self._find_zone_id(domain)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/lib/python3.11/site-packages/certbot_dns_cloudflare/_internal/dns_cloudflare.py", line 237, in _find_zone_id
+    raise errors.PluginError('Unable to determine zone_id for {0} using zone names: '
+certbot.errors.PluginError: Unable to determine zone_id for summastoringen.nl using zone names: ['summastoringen.nl', 'nl']. Please confirm that the domain name has been entered correctly and is already associated with the supplied Cloudflare account.
+2025-12-12 08:22:13,438:ERROR:certbot._internal.log:Unable to determine zone_id for summastoringen.nl using zone names: ['summastoringen.nl', 'nl']. Please confirm that the domain name has been entered correctly and is already associated with the supplied Cloudflare account.

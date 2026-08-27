@@ -1,0 +1,43 @@
+services:
+  uptime-kuma2:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma2
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    volumes:
+      -  .\ThermometerV3\data\uptime-kuma-data:/app/data
+    environment:
+      - TZ=Europe/Amsterdam
+    networks:
+      - kuma_network
+
+  nginx-proxy-manager:
+    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    container_name: nginx_proxy_manager
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - .\ThermometerV3\data\Nginx-data\data:/data
+      - .\ThermometerV3\data\Nginx-data\letsencrypt:/etc/letsencrypt
+    networks:
+      - kuma_network
+    depends_on:
+      - summa-dashboard
+      - uptime-kuma2
+
+  summa-dashboard:
+    build: .
+    container_name: custom-website1
+    restart: unless-stopped
+    volumes:
+      - C:\Users\Baswa\Downloads\OneDrive_2026-08-24 (1)\Technische documentatie\ThermometerV3\database.db:/app/database.db
+    networks:
+      - kuma_network
+
+networks:
+  kuma_network:
+    driver: bridge
