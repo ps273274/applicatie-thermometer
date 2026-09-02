@@ -25,3 +25,8 @@ voor vaker openen:
 5. klaar met programmeren, push het bestand naar github zodat ze volgende deze met wijzigingen kan pakken. (Ga niet met zijn 2en tegelijk in dezelfde file dingen
 aanpassen, dan werkt de push en pull niet.
 6.Sluit docker af met git compose down.
+
+We hebben 3 websites die moeten runnen
+Uptime Kuma: http://localhost:3001/dashboard
+Storingswebsite Summa: http://127.0.0.1:5000/
+Nginx data manager: http://localhost:3000/
