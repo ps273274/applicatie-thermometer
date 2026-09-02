@@ -27,6 +27,6 @@ aanpassen, dan werkt de push en pull niet.
 6.Sluit docker af met git compose down.
 
 We hebben 3 websites die moeten runnen
-Uptime Kuma: http://localhost:3001/dashboard
-Storingswebsite Summa: http://127.0.0.1:5000/
-Nginx data manager: http://localhost:3000/
+-Uptime Kuma: http://localhost:3001/dashboard
+-Storingswebsite Summa: http://127.0.0.1:5000/
+-Nginx data manager: http://localhost:3000/
