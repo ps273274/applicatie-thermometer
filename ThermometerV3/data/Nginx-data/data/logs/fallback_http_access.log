@@ -1,8 +1,0 @@
-[01/Sep/2026:07:42:51 +0000] 400 - GET http localhost "/favicon.ico" [Client 127.0.0.1] [Length 230] [Gzip -] "-" "-"
-[01/Sep/2026:07:42:59 +0000] 304 - GET http localhost "/" [Client 172.19.0.1] [Length 0] [Gzip -] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36" "-"
-[01/Sep/2026:07:43:03 +0000] 404 - GET http localhost "/phpmyadmin/" [Client 172.19.0.1] [Length 183] [Gzip 3.21] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36" "-"
-[01/Sep/2026:07:43:09 +0000] 404 - GET http localhost "/phpmyadmin/" [Client 172.19.0.1] [Length 183] [Gzip 3.21] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36" "-"
-[01/Sep/2026:07:43:14 +0000] 404 - GET http localhost "/phpmyadmin/" [Client 172.19.0.1] [Length 183] [Gzip 3.21] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36" "-"
-[01/Sep/2026:08:08:22 +0000] 400 - GET http localhost "/favicon.ico" [Client 127.0.0.1] [Length 230] [Gzip -] "-" "-"
-[02/Sep/2026:08:34:24 +0000] 200 - GET http localhost "/" [Client 172.19.0.1] [Length 568] [Gzip 1.86] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36" "-"
-[02/Sep/2026:08:34:25 +0000] 400 - GET http localhost "/favicon.ico" [Client 127.0.0.1] [Length 230] [Gzip -] "-" "-"
