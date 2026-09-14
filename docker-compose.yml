@@ -33,8 +33,10 @@ services:
     build: .
     container_name: custom-website1
     restart: unless-stopped
+    ports:
+      - "5000:5000"
     volumes:
-      - C:\Users\Baswa\Downloads\OneDrive_2026-08-24 (1)\Technische documentatie\ThermometerV3\database.db:/app/database.db
+      - ./database.db:/app/database.db
     networks:
       - kuma_network
 
