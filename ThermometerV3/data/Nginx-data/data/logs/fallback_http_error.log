@@ -1,0 +1,2 @@
+2026/09/21 08:33:13 [error] 222#222: *91 open() "/var/www/html/status/summa" failed (2: No such file or directory), client: 172.18.0.1, server: localhost-nginx-proxy-manager, request: "GET /status/summa HTTP/1.1", host: "monitor.summastoringen.nl", referrer: "http://127.0.0.1:5000/"
+2026/09/21 08:33:17 [error] 222#222: *91 open() "/var/www/html/status/summa" failed (2: No such file or directory), client: 172.18.0.1, server: localhost-nginx-proxy-manager, request: "GET /status/summa HTTP/1.1", host: "monitor.summastoringen.nl", referrer: "http://127.0.0.1:5000/"
