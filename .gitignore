@@ -1,3 +1,7 @@
-
-ThermometerV3/data/Nginx-data/
-ThermometerV3/data/uptime-kuma-data/
+uptime-kuma-data/
+Nginx-data/
+kuma.db*
+*.sqlite
+.env
+.env.*
+hash_existing.py

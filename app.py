@@ -4,9 +4,22 @@ import os
 import sys
 from flask import Flask, render_template, request, redirect, session, jsonify
 from functools import wraps
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 app.secret_key = "supersecret"
+
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
+
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"]
+)
 
 # Dit is het pad BINNEN de container. 
 # Via docker-compose is dit gekoppeld aan jouw I-schijf.
@@ -111,7 +124,13 @@ def webhook():
         debug_log(f"!!! KRITIEKE FOUT: {e}")
         return jsonify({"status": "error", "message": str(e)}), 500
 
+from werkzeug.security import generate_password_hash
 @app.route('/login', methods=['GET', 'POST'])
+@limiter.limit(
+"5 per 15 minutes",
+methods=["POST"],
+deduct_when=lambda response: response.status_code == 200,
+)
 def login():
     if 'user' in session:
         return redirect('/')
@@ -120,9 +139,9 @@ def login():
         password = request.form['password']
         
         # Check of gebruiker bestaat
-        user = query_db("SELECT * FROM users WHERE username=? AND password=?", (username, password), one=True)
+        user = query_db("SELECT * FROM users WHERE username=?", (username,), one=True)
         
-        if user:
+        if user and check_password_hash(user['password'], password):
             session['user'] = username
             return redirect('/')
         else:
@@ -134,6 +153,12 @@ def login():
 def logout():
     session.pop('user', None)
     return redirect('/login')
+
+@app.errorhandler(429)
+def te_veel_verzoeken(e):
+    if request.path =='/login':
+        return render-template('Login.html', error="Te vaak geprobeerd in te loggen. Probeer het later opnieuw."), 429
+        return "te veel verzoeken. Probeer het later opnieuw.", 429
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

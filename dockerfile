@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Installeer Flask (en andere packages indien nodig)
-RUN pip install flask
+RUN pip install flask Flask-limiter
 
 # Kopieer jouw bestanden (app.py, templates map, static map, database) naar de container
 COPY . .
