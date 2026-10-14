@@ -1,7 +1,6 @@
 uptime-kuma-data/
-Nginx-data/
+Nginx-data*/
 kuma.db*
-*.sqlite
-.env
-.env.*
+database-npm-*.sqlite
 hash_existing.py
+.env
