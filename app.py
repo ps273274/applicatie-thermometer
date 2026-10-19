@@ -166,7 +166,7 @@ def te_veel_inlogpogingen(e):
         seconds_left = 15 * 60
     
     return
-    render_template(login.html, error="Te vaak geprobeerd in te loggen."
+    render_template(login.html, error="Te vaak geprobeerd in te loggen.",
     seconds_left=seconds_left,
     ), 429
 

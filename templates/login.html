@@ -11,4 +11,39 @@
     <input type="password" name="password" placeholder="Wachtwoord" required>
     <button class="login-btn" type="submit">Inloggen</button>
 </form>
+
+{% if seconds_left %}
+<p id="timer-melding">Probeer het opnieuw over <strong id="timer">--:--</strong></p>
+<script>
+  let seconden = {{ seconds_left }};
+  const timer = document.getElementById('timer');
+  const knop = document.querySelector('.login-btn');
+  const velden = document.querySelectorAll('.loginknoppen input');
+
+  function blokkeer(aan) {
+    knop.disabled = aan;
+    velden.forEach(v => v.disabled = aan);
+  }
+
+  function toon() {
+    const m = String(Math.floor(seconden / 60)).padStart(2, '0');
+    const s = String(seconden % 60).padStart(2, '0');
+    timer.textContent = m + ':' + s;
+  }
+
+  blokkeer(true);
+  toon();
+
+  const interval = setInterval(() => {
+    seconden--;
+    if (seconden <= 0) {
+      clearInterval(interval);
+      document.getElementById('timer-melding').textContent = 'Je kunt het nu opnieuw proberen.';
+      blokkeer(false);
+      return;
+    }
+    toon();
+  }, 1000);
+</script>
+{% endif %}
 {% endblock %}
