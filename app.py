@@ -155,20 +155,21 @@ def logout():
     return redirect('/login')
 
 @app.errorhandler(429)
-def te_veel_inlogpogingen(e):
-    if request.path !='/login':
-        #return render-template('Login.html', error="Te vaak geprobeerd in te loggen. Probeer het later opnieuw."), 429
-        return "te veel verzoeken. Probeer het later opnieuw.", 429
-
+def te_veel_pogingen(e):
+    seconds_left = 15 * 60
     try:
         seconds_left = max(1, int(limiter.current_limit.reset_at - time.time()))
     except Exception:
-        seconds_left = 15 * 60
-    
-    return
-    render_template(login.html, error="Te vaak geprobeerd in te loggen.",
-    seconds_left=seconds_left,
-    ), 429
+        pass
+
+    if request.path == '/login':
+        return render_template(
+            'login.html',
+            error="Te veel mislukte pogingen.",
+            seconds_left=seconds_left,
+        ), 429
+
+    return "Te veel verzoeken, probeer het later opnieuw.", 429
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
