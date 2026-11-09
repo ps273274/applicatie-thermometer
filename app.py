@@ -25,6 +25,15 @@ limiter = Limiter(
 # Via docker-compose is dit gekoppeld aan jouw I-schijf.
 DB_PATH = "/app/database.db"
 
+def Email_kolom():
+    with sqlite3.connect(DB_PATH) as con:
+        kolommen = [r[1] for r in con.execute("PRAGMA table_info(users)")]
+        if "email" not in kolommen:
+            con.execute("ALTER Table user ADD COLUMN email TEXT")
+            con.commit()
+
+Email_kolom()
+
 # ------- Debug Functie (Voor in je terminal) -------
 def debug_log(bericht):
     """Print berichten direct naar de console zodat je ze ziet."""
@@ -110,12 +119,27 @@ def webhook():
 
         # Stap 3: Opslaan in Database
         debug_log(f"Stap 3: Verbinden met database op {DB_PATH}...")
-        
+
         with sqlite3.connect(DB_PATH) as con:
             con.execute("INSERT INTO logs (melding, datum) VALUES (?, ?)", (log_bericht, tijdstip))
             con.commit()
-        
+
         debug_log("Stap 3 OK: Succesvol opgeslagen in database!")
+        heartbeat = data.get('heartbeat') or {}
+
+
+        rows = query_db("SELECT email FROM users WHERE email IS NOT NULL AND email != ''")
+        ontvangers = [row['email'] for r in rows]
+        if heartbeat.get('status') == 0:   # 0 = down, 1 = up
+            try:
+                alert = Message(f"STORING: {monitor_name}",
+                                recipients=[APP.config["MAIL-DEFAULT-SENDER"]],
+                                bcc=ontvangers,
+                                )
+                alert.body = f"{log_bericht}\nTijdstip: {tijdstip}"
+                mail.send(alert)
+            except Exception as e:
+                debug_log(f"Mail versturen mislukt: {e}")
         debug_log("--- EINDE MELDING ---")
         
         return jsonify({"status": "success"}), 200

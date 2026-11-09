@@ -35,8 +35,22 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:5000:5000"
+    env_file:
+      - path: .env
+        required: false
     volumes:
       - ./database.db:/app/database.db
+    environment:
+      MAIL_SERVER: mailpit
+      MAIL_PORT: "1025"
+    networks:
+      - kuma_network
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    ports:
+      - "127.0.0.1:8025:8025"
     networks:
       - kuma_network
 

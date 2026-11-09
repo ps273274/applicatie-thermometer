@@ -4,3 +4,4 @@ kuma.db*
 database-npm-*.sqlite
 hash_existing.py
 .env
+database.db
