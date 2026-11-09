@@ -15,7 +15,7 @@
 {% if seconds_left %}
 <p id="timer-melding">Probeer het opnieuw over <strong id="timer">--:--</strong></p>
 <script>
-  let seconden = {{ seconds_left }};
+  let seconden = {seconds_left };
   const timer = document.getElementById('timer');
   const knop = document.querySelector('.login-btn');
   const velden = document.querySelectorAll('.loginknoppen input');
