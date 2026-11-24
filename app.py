@@ -2,6 +2,9 @@ import sqlite3
 import datetime
 import os
 import sys
+import time
+#import msal
+#import requests
 from flask import Flask, render_template, request, redirect, session, jsonify
 from functools import wraps
 from werkzeug.security import check_password_hash
@@ -25,14 +28,41 @@ limiter = Limiter(
 # Via docker-compose is dit gekoppeld aan jouw I-schijf.
 DB_PATH = "/app/database.db"
 
-def Email_kolom():
-    with sqlite3.connect(DB_PATH) as con:
-        kolommen = [r[1] for r in con.execute("PRAGMA table_info(users)")]
-        if "email" not in kolommen:
-            con.execute("ALTER Table user ADD COLUMN email TEXT")
-            con.commit()
+#_msal_app = none
 
-Email_kolom()
+#def _get_token():
+#    global _msal_app
+#    if _msal_app is None:
+#        _msal_app = msal.ConfidentialClietApplication(
+#            os.environ["GRAPH_CLIENT_ID"]
+#            authority=f"https://login.microsoftonline.com/{os.environ['GRAPH_TENANT_ID']}",
+#            client_credential=os.environ["GRAPH_CLIENT_SECRET"],
+#        )
+#    result = _msal_app.acquire_token_for_client(
+#        scopes=["https://graph.microsoft.com/.default"]
+#    )
+#    if "access_token" not in result:
+#        raise RuntimeError(result.get("error_description", "Geen token ontvangen"))+
+#    return result["access_token"]
+#
+#    def Graph_mail_versturen(onderwerp, inhoud, ontvangers):
+#        afzender = os.environ["GRAPH_SENDER"]
+#        payload = {
+#            Message: {
+#                "Subject": onderwerp,
+#                "Body": {"ContentType": "Text", "Content": inhoud}
+#                "ToRecipients": [{"EmailAddress": {"Address": afzender}}],
+#                "bccRecipients": [{"EmailAddress": {"Address": a}} for a in ontvangers]
+#            },
+#            "SaveToSentItems": "False",
+#        }
+#        r = requests.post(
+#            f"https://graph.microsoft.com/v1.0/users/{afzender}/sendMail",
+#            headers={"authorization": f"Bearer {_get_token()}"},
+#            json=payload,
+#            timeout=10,
+#        )
+#        r.raise_for_status()
 
 # ------- Debug Functie (Voor in je terminal) -------
 def debug_log(bericht):
@@ -142,7 +172,21 @@ def webhook():
                 debug_log(f"Mail versturen mislukt: {e}")
         debug_log("--- EINDE MELDING ---")
         
-        return jsonify({"status": "success"}), 200
+        heartbeat = data.get('heartbeat', {})
+        rows = query_db("SELECT email FROM users WHERE email is NOT NULL AND email != ''")
+        # ontvangers = [r['email'] for r in rows]
+
+        # if heartbeat.get('status') == 0 and ontvangers:
+        #     try:
+        #         send_graph_mail(f"STORING {monitor_name}")
+        #                         f"{log_bericht}\nTijdstip: {tijdstip}", ontvangers)
+        
+#        except Exception as e:
+ #           debug_log(f"!!! MISLUKT OM DE MAIL TE VERZENDEN: {e}")
+
+  #      debug_log(" ---EINDE MELDING ---")
+        
+   #     return jsonify({"status": "success"}), 200
 
     except Exception as e:
         debug_log(f"!!! KRITIEKE FOUT: {e}")
@@ -184,7 +228,7 @@ def te_veel_pogingen(e):
     try:
         seconds_left = max(1, int(limiter.current_limit.reset_at - time.time()))
     except Exception:
-        pass
+        debug_log(f"Resterende tijd niet te bepalen: {ex}")
 
     if request.path == '/login':
         return render_template(
